@@ -53,6 +53,12 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <!--  自定义starter 测试       -->
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>Anytings-learn-starter</artifactId>
+            <version>0.0.4-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <dependencyManagement>
