@@ -6,7 +6,7 @@
     <artifactId>web</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
-    <name>Tj-AnyThings-web</name>
+    <name>AnyThings-web</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
