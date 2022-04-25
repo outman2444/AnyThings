@@ -1,6 +1,6 @@
 package com.example.web.controller;
 
-import com.example.learn.starter.LearnStarterService;
+import com.example.learning.starter.LearnStarterService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,7 +13,7 @@ import javax.annotation.Resource;
  * @date 2022/04/24
  */
 @RestController
-public class TestStartController {
+public class TestLearningStartController {
 
     @Resource
     private LearnStarterService learnStarterService;
