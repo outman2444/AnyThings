@@ -16,12 +16,12 @@ public class RangeIssuse {
     public static void main(String[] args) {
         new Range<Long>(
                 1648915200000L,
-                1650384000000L,
-                (c, end, i) -> {
-                    if ((end - c) / DateUtils.MILLIS_PER_DAY > 0) {
-                        return c + DateUtils.MILLIS_PER_DAY;
+                1648915200000L,
+                (curr, end, i) -> {
+                    if ((end - curr) / DateUtils.MILLIS_PER_DAY <= 0) {
+                        return null;
                     }
-                    return null;
+                    return curr + DateUtils.MILLIS_PER_DAY;
                 }
         ).forEachRemaining(item ->
                 System.out.println(DateFormatUtils.format(item, "yyyy-MM-dd"))

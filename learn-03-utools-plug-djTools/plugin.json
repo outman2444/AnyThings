@@ -1,0 +1,14 @@
+{
+  "main": "main.html",
+  "logo": "DjLogo.png",
+  "features": [
+    {
+      "code": "security-helper",
+      "explain": "蛋卷加解密工具",
+      "cmds": [
+        "dj",
+        "蛋卷"
+      ]
+    }
+  ]
+}
