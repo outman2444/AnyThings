@@ -39,7 +39,7 @@ console.log(SHA256("Message"));
 Including all libraries, for access to extra methods:
 
 ```javascript
-var CryptoJS = require("crypto-js");
+var CryptoJS = require("learn-03-utools-plug-djTools/lib/crypto-js-4.1.1/crypto-js");
 console.log(CryptoJS.HmacSHA1("Message", "Key"));
 ```
 

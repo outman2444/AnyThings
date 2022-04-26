@@ -1,6 +1,6 @@
 {
   "main": "main.html",
-  "logo": "DjLogo.png",
+  "logo": "./resource/DjLogo.png",
   "features": [
     {
       "code": "security-helper",

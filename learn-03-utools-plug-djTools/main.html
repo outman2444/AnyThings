@@ -6,82 +6,32 @@
         <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
         <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/js-base64@3.7.2/base64.min.js"></script>
-        <script src="crypto-js-4.1.1/crypto-js.js"></script>
-        <script src="crypto-js-4.1.1/tripledes.js"></script>
-        <script src="crypto-js-4.1.1/mode-ecb.js"></script>
-        <script src="security-helper.js"></script>
+        <!--        <script src="https://cdn.jsdelivr.net/npm/js-base64@3.7.2/base64.min.js"></script>-->
+        <script src="lib/crypto-js-4.1.1/crypto-js.js"></script>
+        <script src="lib/crypto-js-4.1.1/tripledes.js"></script>
+        <script src="lib/crypto-js-4.1.1/mode-ecb.js"></script>
+<!--        <script src="./page/security-helper/security-helper.js"></script>-->
+
     </head>
     <body>
+        <ul class="nav nav-tabs" id="myTab">
+            <li class="active">
+                <a data-src="./page/security-helper/security-helper.html" data-toggle="tab">加解密</a>
+            </li>
+            <li>
+                <a data-src="./page/internal-url-list/internal-url-list.html" data-toggle="tab">资源</a>
+            </li>
+        </ul>
         <div class="tab-content">
-            <div class="tab-pane fade in active" id="home">加解密</div>
-            <div class="tab-pane fade" id="svn">时间戳</div>
-            <div class="tab-pane fade" id="ios"></div>
-            <div class="tab-pane fade" id="java">...</div>
-        </div>
-        <div class="container" id="div-setting-key">
-            <h5>设置密钥：</h5>
-            <div class="row">
-                <div class="col-xs-8">
-                    <input id="input-key" value=""/>
-                </div>
-                <div class="col-xs-4">
-                    <input id="input-iv" value=""/>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <h5>加密：</h5>
-            <div class="row">
-                <div class="col-xs-5">
-                    <input id="input-encode" value=""/>
-                </div>
-                <div class="col-xs-2">结果：</div>
-                <div class="col-xs-5">
-                    <div id="div-encode"></div>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <h5>解密：</h5>
-            <div class="row">
-                <div class="col-xs-5">
-                    <input id="input-decode"/>
-                </div>
-                <div class="col-xs-2">结果：</div>
-                <div class="col-xs-5">
-                    <div id="div-decode"></div>
-                </div>
-            </div>
         </div>
     </body>
     <script type="text/javascript">
-
-		// dom 定义
-		var $input_encode = $("#input-encode")
-		var $div_encode = $("#div-encode")
-		var $input_decode = $("#input-decode")
-		var $div_decode = $("#div-decode")
-		var $div_setting_key = $("#div-setting-key")
-
-
-		// 加解密页面初始化
-		let init = function() {
-
-		}
-		init();
-
-		// 事件绑定
-		$input_encode.blur(() => {
-			let str = $input_encode.val();
-			let encodedStr = encode(str)
-			$div_encode.text(encodedStr)
-		})
-
-		$input_decode.blur(() => {
-			let str = $input_decode.val();
-			let decodedStr = decode(str)
-			$div_decode.text(decodedStr)
+		//  主内容加载
+		$('#myTab a').click(function(e) {
+			$(this).tab('show')
+			$(".tab-content").load(
+				$(this).attr("data-src")
+			)
 		})
     </script>
 </html>
