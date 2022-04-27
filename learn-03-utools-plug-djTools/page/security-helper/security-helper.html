@@ -1,15 +1,5 @@
-<body>
-    <div class="container" id="div-setting-key">
-        <h5>设置密钥：</h5>
-        <div class="row">
-            <div class="col-xs-8">
-                <input id="input-key" value=""/>
-            </div>
-            <div class="col-xs-4">
-                <input id="input-iv" value=""/>
-            </div>
-        </div>
-    </div>
+<div>
+    <!--  加密 -->
     <div class="container">
         <h5>加密：</h5>
         <div class="row">
@@ -22,6 +12,7 @@
             </div>
         </div>
     </div>
+    <!-- 解密   -->
     <div class="container">
         <h5>解密：</h5>
         <div class="row">
@@ -34,17 +25,34 @@
             </div>
         </div>
     </div>
-</body>
-<script src="security-helper.js"></script>
-<!--<script>-->
-<!--	// dom 定义-->
-<!--	var $input_encode = $("#input-encode")-->
+    <!--  设置密钥  -->
+    <div class="container" style="padding-top:5px" id="div-setting-key">
+        <div class="row">
+            <button type="button" class="form-control btn" id="btn-setting">设置密钥</button>
+            <form role="form" id="form-setting-key">
+                <div class="row">
+                    <div class="col-xs-5">
+                        <input id="input-key" class="form-control" placeholder="请输入key" value=""/>
+                    </div>
+                    <div class="col-xs-3">
+                        <input id="input-iv" class="form-control" placeholder="请输入iv" value=""/>
+                    </div>
+                    <div class="col-xs-2">
+                        <button type="button" class="form-control btn btn-success" id="btn-save—key">保存到本地</button>
+                    </div>
+                    <div class="col-xs-2">
+                        <button type="button" class="form-control btn btn-success" id="btn-save—cancel">取消</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
-<!--	// 事件绑定-->
-<!--	$input_encode.blur(() => {-->
-<!--		console.log("2")-->
-<!--	})-->
-<!--</script>-->
-
+<script src="lib/crypto-js-4.1.1/crypto-js.js"></script>
+<script src="lib/crypto-js-4.1.1/tripledes.js"></script>
+<script src="lib/crypto-js-4.1.1/mode-ecb.js"></script>
+<script src="util/dj-tripleDES.js"></script>
+<script src="page/security-helper/security-helper.js"></script>
 
 
