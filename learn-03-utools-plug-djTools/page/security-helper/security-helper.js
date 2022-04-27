@@ -129,16 +129,15 @@ dom.$btn_save_cancel.click(() => {
 
 const func = {
 	checkKey: () => {
-		if (!data.key) {
+		if (!data.key || data.key === '' || data.key.length !== 32) {
+			console.log("key err")
 			return false
-		} else {
-			return data.key.length === 24;
 		}
-		if (!data.iv) {
+		if (!data.iv || data.iv === '' || data.iv.length !== 12) {
+			console.log("iv err")
 			return false
-		} else {
-			return data.iv.length === 8;
 		}
+		return true;
 	}
 }
 

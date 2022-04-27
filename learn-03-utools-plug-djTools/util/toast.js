@@ -1,7 +1,7 @@
-const alert_success = '<div class="alert alert-success" style="width:50%;margin: 5px; float:right"><span></span></div>'
-const alert_info = '<div class="alert alert-info" style="width:50%;margin: 5px; float:right"><span></span></div>'
-const alert_warning = '<div class="alert alert-warning" style="width:50%;margin: 5px; float:right"><span></span></div>'
-const alert_danger = '<div class="alert alert-danger" style="width:50%; margin: 5px;float:right"><span></span></div>'
+const alert_success = '<div></div><div class="alert alert-success" style="margin: 3px 0px;padding: 5px;text-align: right;width: auto"><span></span></div></div>'
+const alert_info = '<div class="alert alert-info" style="margin: 3px 0px;padding: 5px;text-align: right;width: auto"><span></span></div>'
+const alert_warning = '<div class="alert alert-warning" style="margin: 3px 0px;padding: 5px;text-align: right;width: auto"><span></span></div>'
+const alert_danger = '<div class="alert alert-danger" style="margin: 3px 0px;padding: 5px;text-align: right;width: auto"><span></span></div>'
 
 // 吐司
 function toast (mess, type) {
@@ -10,10 +10,11 @@ function toast (mess, type) {
 		mess: mess
 	})
 	let str = getAlert(type)
-	$("body").append(str);
+	$("#div-toast").append(str);
 	$(".alert").fadeIn().find("span").html(mess);
 	setTimeout(function() {
 		$(".alert").fadeOut();
+		$(".alert").remove();
 	}, 2000)
 }
 
