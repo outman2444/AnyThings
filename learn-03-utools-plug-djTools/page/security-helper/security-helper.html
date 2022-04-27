@@ -1,38 +1,26 @@
-<div>
-    <!--  加密 -->
-    <div class="container">
-        <h5>加密：</h5>
+<div style="padding:20px;margin: auto;text-align: center;">
+    <div class="container" id="div-setting-key">
         <div class="row">
-            <div class="col-xs-5">
-                <input id="input-encode" value=""/>
-            </div>
-            <div class="col-xs-2">结果：</div>
-            <div class="col-xs-5">
-                <div id="div-encode"></div>
-            </div>
-        </div>
-    </div>
-    <!-- 解密   -->
-    <div class="container">
-        <h5>解密：</h5>
-        <div class="row">
-            <div class="col-xs-5">
-                <input id="input-decode"/>
-            </div>
-            <div class="col-xs-2">结果：</div>
-            <div class="col-xs-5">
-                <div id="div-decode"></div>
-            </div>
-        </div>
-    </div>
-    <!--  设置密钥  -->
-    <div class="container" style="padding-top:5px" id="div-setting-key">
-        <div class="row">
-            <button type="button" class="form-control btn" id="btn-setting">设置密钥</button>
+
             <form role="form" id="form-setting-key">
-                <div class="row">
+                <div class="row" style="padding: 5px 0px;">
+                    <div class="col-xs-6">
+                        <input id="input-value" class="form-control" placeholder="请输入数据" value=""/>
+                    </div>
+                    <div class="col-xs-2">
+                        <button type="button" class="form-control btn btn-success" id="btn-encode">加密</button>
+                    </div>
+                    <div class="col-xs-2">
+                        <button type="button" class="form-control btn btn-success" id="btn-decode">解密</button>
+                    </div>
+                    <div class="col-xs-2">
+                        <button type="button" class="form-control btn btn-info" id="btn-setting">设置密钥</button>
+                    </div>
+                </div>
+                <div class="row" id="row-setting" style="padding: 5px 0px;">
                     <div class="col-xs-5">
-                        <input id="input-key" class="form-control" placeholder="请输入key" value=""/>
+                        <input id="input-key" class="form-control" placeholder="请输入key"
+                               value=""/>
                     </div>
                     <div class="col-xs-3">
                         <input id="input-iv" class="form-control" placeholder="请输入iv" value=""/>
@@ -41,8 +29,15 @@
                         <button type="button" class="form-control btn btn-success" id="btn-save—key">保存到本地</button>
                     </div>
                     <div class="col-xs-2">
-                        <button type="button" class="form-control btn btn-success" id="btn-save—cancel">取消</button>
+                        <button type="button" class="form-control btn btn-info" id="btn-save—cancel">取消</button>
                     </div>
+                </div>
+                <div class="row" style="padding: 5px 0px;">
+                    <div class="col-xs-12">
+                        <textarea id="textarea-results" style="overflow-y:auto;width: 100%" class="form-control"
+                                  placeholder="结果在这里显示"></textarea>
+                    </div>
+
                 </div>
             </form>
         </div>

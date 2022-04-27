@@ -3,19 +3,21 @@
  */
 const dom = {
 	// input
-	$input_encode: $("#input-encode"),
-	$input_decode: $("#input-decode"),
+	$input_value: $("#input-value"),
 	$input_key: $("#input-key"),
 	$input_iv: $("#input-iv"),
-	// div
-	$div_encode: $("#div-encode"),
-	$div_decode: $("#div-decode"),
+	// textarea
+	$textarea_results: $("#textarea-results"),
 	// btn
+	$btn_encode: $("#btn-encode"),
+	$btn_decode: $("#btn-decode"),
 	$btn_setting: $("#btn-setting"),
 	$btn_save_key: $("#btn-save—key"),
+	$btn_save_cancel: $("#btn-save—cancel"),
 	// form
 	$form_setting_key: $("#form-setting-key"),
-	$btn_save_cancel: $("#btn-save—cancel")
+	// row
+	$row_setting: $("#row-setting"),
 }
 
 /**
@@ -34,7 +36,6 @@ const data = {
  * 初始化数据
  */
 const init = function() {
-	dom.$form_setting_key.hide()
 	data.key = utools.db.get("security-helper-key")
 	data.iv = utools.db.get("security-helper-iv")
 	console.log({
@@ -43,12 +44,7 @@ const init = function() {
 	})
 
 	// 隐藏表单
-	dom.$form_setting_key.hide()
-	// 显示设置按钮
-	dom.$btn_setting.show()
-
-	console.log("加解密工具初始化完成")
-	console.log(data)
+	dom.$row_setting.hide()
 }
 init()
 
@@ -56,33 +52,39 @@ init()
  * 事件绑定 start
  */
 
-// 加密输入框失焦
-dom.$input_encode.blur(() => {
+// 加密
+dom.$btn_encode.click(() => {
 	if (!func.checkKey()) {
-		toast("key&iv 无效")
+		toast("key&iv 无效，请设置密钥", "danger")
 		return false;
 	}
-	let str = dom.$input_encode.val();
+	let str = dom.$input_value.val();
+	if (!func.checkValue(str)) {
+		toast("请输入需要加密的内容", "danger")
+		return false;
+	}
 	let encodedStr = data.djTriDes.encode(str, data.key, data.iv)
-	dom.$div_encode.text(encodedStr)
+	dom.$textarea_results.text(encodedStr)
 })
-// 解密输入框失焦
-dom.$input_decode.blur(() => {
+// 解密
+dom.$btn_decode.click(() => {
 	if (!func.checkKey()) {
-		toast("key&iv 无效")
+		toast("key&iv 无效，请设置密钥", "danger")
 		return false;
 	}
-	let str = dom.$input_decode.val();
+	let str = dom.$input_value.val();
+	if (!func.checkValue(str)) {
+		toast("请输入需要解密的内容", "danger")
+		return false;
+	}
 	let decodedStr = data.djTriDes.decode(str, data.key, data.iv)
-	dom.$div_decode.text(decodedStr)
+	dom.$textarea_results.text(decodedStr)
 })
 
 // 点击设置密钥按钮
 dom.$btn_setting.click(() => {
-	// 显示表单
-	dom.$form_setting_key.show()
-	// 隐藏自己
-	dom.$btn_setting.hide()
+	// 显示设置
+	dom.$row_setting.show()
 })
 
 // 保存 key iv
@@ -92,14 +94,12 @@ dom.$btn_save_key.click(() => {
 	data.iv = dom.$input_iv.val();
 
 	if (!func.checkKey()) {
-		toast("key&iv 无效")
+		toast("key&iv 无效，请设置密钥", "danger")
 		return false;
 	}
 
-	// 隐藏表单
-	dom.$form_setting_key.hide()
-	// 显示设置按钮
-	dom.$btn_setting.show()
+	// 隐藏设置
+	dom.$row_setting.hide()
 
 	utools.db.put({
 		_id: "security-helper-key",
@@ -114,10 +114,8 @@ dom.$btn_save_key.click(() => {
 })
 
 dom.$btn_save_cancel.click(() => {
-	// 隐藏表单
-	dom.$form_setting_key.hide()
-	// 显示设置按钮
-	dom.$btn_setting.show()
+	// 隐藏设置
+	dom.$row_setting.hide()
 })
 /**
  * 事件绑定 end
@@ -126,8 +124,8 @@ dom.$btn_save_cancel.click(() => {
 /**
  * 业务逻辑
  */
-
 const func = {
+	// 检查密钥
 	checkKey: () => {
 		if (!data.key || data.key === '' || data.key.length !== 32) {
 			console.log("key err")
@@ -138,6 +136,15 @@ const func = {
 			return false
 		}
 		return true;
+	},
+	// 检查 值
+	checkValue: (value) => {
+		if (!value || value === '' || data.key.length === 0) {
+			console.log("value err")
+			return false
+		}
+		return true;
 	}
+
 }
 
