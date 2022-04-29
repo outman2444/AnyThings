@@ -9,6 +9,7 @@
         <script src="https://cdn.jsdelivr.net/npm/js-base64@3.7.2/base64.min.js"></script>
         <script src="util/toast.js"></script>
         <script src="util/utools-db.js"></script>
+        <script src="util/page_load.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     </head>
     <body style="padding:5px;">
@@ -32,23 +33,44 @@
         </div>
     </body>
     <script type="text/javascript">
-		const dom = {}
-		const data = {
-			username: utools.db.get("login-username"),
-			password: utools.db.get("login-password")
-		}
-		// TODO 校验登录信息  没有则踢到登录页
+
+		new page_load("main.html", {
+				dom: {},
+				data: {
+					// username: utools.db.get("login-username"),
+					// password: utools.db.get("login-password")
+					key: "e",
+					utools_db: new UtoolsDB(),
+				},
+				on_ready: (page) => {
+
+					// TODO 校验登录信息  没有则踢到登录页
 
 
-		//  主内容加载
-		$('#myTab a').click(function(e) {
-			$(this).tab('show')
-			$(".tab-content").load(
-				$(this).attr("data-src")
-			)
-		})
-		// 默认选中第一个
-		$('#myTab li:eq(0) a').click()
+					//  主内容加载
+					$('#myTab a').click(function(e) {
+						$(this).tab('show')
+						$(".tab-content").load(
+							$(this).attr("data-src")
+						)
+					})
+					// 默认选中第一个
+					$('#myTab li:eq(0) a').click()
+				},
+				func: {},
+				listener: (page) => {
+				}
+			}
+		)
+
+		// const dom = {}
+		// const data = {
+		// 	username: utools.db.get("login-username"),
+		// 	password: utools.db.get("login-password")
+		// }
+
+
+
     </script>
 </html>
 
