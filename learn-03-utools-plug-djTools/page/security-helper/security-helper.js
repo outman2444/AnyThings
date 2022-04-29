@@ -26,6 +26,8 @@ const dom = {
 const data = {
 	// 蛋卷加解密对象
 	djTriDes: new DjTriDes(),
+	// 数据库对象
+	utools_db: new UtoolsDB(),
 	// 密钥
 	key: "",
 	// 密钥向量
@@ -36,12 +38,8 @@ const data = {
  * 初始化数据
  */
 const init = function() {
-	data.key = utools.db.get("security-helper-key")
-	data.iv = utools.db.get("security-helper-iv")
-	console.log({
-		key: data.key,
-		iv: data.iv
-	})
+	data.key = data.utools_db.get("security-helper-key")
+	data.iv = data.utools_db.get("security-helper-iv")
 
 	// 隐藏表单
 	dom.$row_setting.hide()
@@ -54,6 +52,7 @@ init()
 
 // 加密
 dom.$btn_encode.click(() => {
+	console.log("加密")
 	if (!func.checkKey()) {
 		toast("key&iv 无效，请设置密钥", "danger")
 		return false;
@@ -64,10 +63,12 @@ dom.$btn_encode.click(() => {
 		return false;
 	}
 	let encodedStr = data.djTriDes.encode(str, data.key, data.iv)
-	dom.$textarea_results.text(encodedStr)
+	console.log("结果：" + encodedStr)
+	dom.$textarea_results.val(encodedStr)
 })
 // 解密
 dom.$btn_decode.click(() => {
+	console.log("解密")
 	if (!func.checkKey()) {
 		toast("key&iv 无效，请设置密钥", "danger")
 		return false;
@@ -78,7 +79,8 @@ dom.$btn_decode.click(() => {
 		return false;
 	}
 	let decodedStr = data.djTriDes.decode(str, data.key, data.iv)
-	dom.$textarea_results.text(decodedStr)
+	console.log("结果：" + decodedStr)
+	dom.$textarea_results.val(decodedStr)
 })
 
 // 点击设置密钥按钮
@@ -101,15 +103,9 @@ dom.$btn_save_key.click(() => {
 	// 隐藏设置
 	dom.$row_setting.hide()
 
-	utools.db.put({
-		_id: "security-helper-key",
-		data: data.key
-	})
-
-	utools.db.put({
-		_id: "security-helper-iv",
-		data: data.iv
-	})
+	// 数据持久化
+	data.utools_db.put("security-helper-key", data.key)
+	data.utools_db.put("security-helper-iv", data.iv)
 
 })
 
@@ -127,6 +123,10 @@ dom.$btn_save_cancel.click(() => {
 const func = {
 	// 检查密钥
 	checkKey: () => {
+		console.log({
+			key: data.key,
+			iv: data.iv
+		})
 		if (!data.key || data.key === '' || data.key.length !== 32) {
 			console.log("key err")
 			return false
