@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>蛋卷小工具</title>
+        <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+        <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/js-base64@3.7.2/base64.min.js"></script>
+        <script src="util/toast.js"></script>
+        <script src="util/utools-db.js"></script>
+        <script src="util/page_load.js"></script>
+        <script src="util/string-utils.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    </head>
+    <body>
+        <div id="index-body">
+
+        </div>
+        <div id="div-toast"
+             style="position: fixed; top:10px; right:10px; z-index: 999;width: auto;height: auto;color: cornsilk;">
+
+        </div>
+    </body>
+    <script type="text/javascript">
+        new page_load("index.html", _this = {
+                    dom: {
+                        $index_body: $("#index-body")
+                    },
+                    data: {
+                        utools_db: new UtoolsDB(),
+                        string_util: new StringUtils(),
+                        user_name: "",
+                        password: "",
+                        path_login: "./page/login/login.html",
+                        path_main: "./page/main/main.html",
+                        axios: this.axios
+                    },
+                    func: {
+                        check_login: () => {
+                            // 获取 账户名密码
+                            let username = _this.data.utools_db.get("username");
+                            let password = _this.data.utools_db.get("password");
+                            username = _this.data.string_util.defaultIfNull(username, "")
+                            password = _this.data.string_util.defaultIfNull(password, "")
+                            return _this.data.string_util.isNotBlank(username) && _this.data.string_util.isNotBlank(password);
+                        }
+                    },
+                    on_ready: () => {
+                        // 校验登录信息  没有则踢到登录页
+                        if (!_this.func.check_login()) {
+                            console.log("未登陆")
+                            _this.dom.$index_body.load(_this.data.path_login)
+                        } else {
+                            console.log("已登陆")
+                            _this.dom.$index_body.load(_this.data.path_main)
+                        }
+                    },
+                    listener: () => {
+                    }
+                }
+        )
+    </script>
+</html>
