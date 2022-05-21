@@ -3,15 +3,16 @@
     <head>
         <meta charset="UTF-8">
         <title>蛋卷小工具</title>
-        <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-        <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-        <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/js-base64@3.7.2/base64.min.js"></script>
+        <link rel="stylesheet" href="lib/bootstrap-3.3.7/bootstrap.min.css">
+        <script src="lib/bootstrap-3.3.7/bootstrap.min.js"></script>
+        <script src="lib/jquery-2.1.1/jquery.min.js"></script>
+<!--        <script src="https://cdn.jsdelivr.net/npm/js-base64@3.7.2/base64.min.js"></script>-->
         <script src="util/toast.js"></script>
         <script src="util/utools-db.js"></script>
         <script src="util/page_load.js"></script>
         <script src="util/string-utils.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="util/dj-request.js"></script>
+        <script src="util/utools-browser.js"></script>
     </head>
     <body>
         <div id="index-body">
@@ -30,11 +31,12 @@
                     data: {
                         utools_db: new UtoolsDB(),
                         string_util: new StringUtils(),
+                        dj_request: new DjRequest(),
+                        utools_browser: new UtoolsBrowser(),
                         user_name: "",
                         password: "",
                         path_login: "./page/login/login.html",
                         path_main: "./page/main/main.html",
-                        axios: this.axios
                     },
                     func: {
                         check_login: () => {

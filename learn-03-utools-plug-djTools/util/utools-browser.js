@@ -4,12 +4,14 @@
 function UtoolsBrowser() {
 
     /**
-     * 跳转
+     * 打开浏览器
      * @param url
-     * @param headers
-     * @param timeout
+     * @param op
      */
-    this.goto = (url, headers, timeout) => {
-        utools.ubrowser.goto(url, headers, timeout);
+    this.goto = (url, op = (goto) => {
+    }) => {
+        let goto = utools.ubrowser.goto(url);
+        op(goto)
+        goto.run({width: 1000, height: 600})
     }
 }

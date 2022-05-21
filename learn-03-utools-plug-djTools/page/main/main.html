@@ -1,17 +1,19 @@
 <body style="padding:5px;">
     <ul class="nav nav-tabs" id="myTab">
         <li>
-            <a data-src="./page/security-helper/security-helper.html" data-toggle="tab">加解密</a>
+            <a data-src="page/security-helper/security-helper.html" data-toggle="tab">加解密</a>
         </li>
-        <li>
-            <a data-src="./page/tail-log/tail-log.html" data-toggle="tab">日志监控</a>
-        </li>
-        <li>
-            <a data-src="./page/internal-url-list/internal-url-list.html" data-toggle="tab">访问资源列表</a>
-        </li>
+        <!--        <li>-->
+        <!--            <a data-src="page/tail-log/tail-log.html" data-toggle="tab">日志监控</a>-->
+        <!--        </li>-->
+        <!--        <li>-->
+        <!--            <a data-src="page/internal-url-list/internal-url-list.html" data-toggle="tab">访问资源列表</a>-->
+        <!--        </li>-->
+        <!--        <li>-->
+        <!--            <a data-src="page/setting/setting.html" data-toggle="tab">设置</a>-->
+        <!--        </li>-->
     </ul>
     <div class="tab-content">
-
     </div>
 </body>
 <script type="text/javascript">
@@ -33,7 +35,6 @@
                 listener: () => {
                     //  主内容加载
                     _this.dom.$myTab_a.click(function () {
-                        $(this).tab('show')
                         _this.dom.$tab_content.load(
                                 $(this).attr("data-src")
                         )
