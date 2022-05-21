@@ -1,3 +1,6 @@
+/**
+ * 页面加载
+ */
 new page_load("login.html", _this = {
         dom: {
             $input_username: $('#input-username'),
@@ -8,6 +11,7 @@ new page_load("login.html", _this = {
             utools_db: new UtoolsDB(),
         },
         func: {
+            // 登陆
             login: () => {
                 let username = _this.dom.$input_username.val();
                 let password = _this.dom.$input_password.val();

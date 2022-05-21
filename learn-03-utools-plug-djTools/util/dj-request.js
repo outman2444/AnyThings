@@ -1,5 +1,7 @@
 /**
- *  请求
+ *  蛋卷-请求工具
+ *  小工具登陆时的 账户密码为了后续其他功能做免密支持
+ *  在请求其他接口时会自动携带token
  */
 function DjRequest() {
     this.url_get_token = "http://sce-rolling.snowballfinance.com/login.json";

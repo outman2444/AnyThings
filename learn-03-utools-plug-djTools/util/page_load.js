@@ -11,6 +11,14 @@ let global_this = {
  * 页面加载
  * @param page_name
  * @param page
+ *
+ * 自己写的页面加载框架
+ * 数据域、dom域、函数域 所有页面共享
+ * 打通多页面数据联动
+ * dom事件和 生命周期事件为页面私有
+ *
+ * 注：
+ *  **这里把函数当作一种资源而非业务逻辑**
  */
 function page_load(page_name,
                    _this = {

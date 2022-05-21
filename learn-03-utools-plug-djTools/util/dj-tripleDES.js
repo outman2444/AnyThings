@@ -1,4 +1,7 @@
-// 加密算法对象
+/**
+ * dj-加密算法对象
+ * @constructor
+ */
 function DjTriDes () {
 
 	// 加密

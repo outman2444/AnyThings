@@ -3,7 +3,11 @@ const alert_info = '<div class="alert alert-info" style="margin: 3px 0px;padding
 const alert_warning = '<div class="alert alert-warning" style="margin: 3px 0px;padding: 5px;text-align: right;width: auto"><span></span></div>'
 const alert_danger = '<div class="alert alert-danger" style="margin: 3px 0px;padding: 5px;text-align: right;width: auto"><span></span></div>'
 
-// 吐司
+/**
+ * 全局页面吐司
+ * @param mess
+ * @param type
+ */
 function toast (mess, type) {
 	console.log({
 		toast: type,

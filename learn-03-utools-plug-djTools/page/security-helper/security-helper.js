@@ -38,7 +38,6 @@ new page_load("security-helper.js", _this = {
             _this.dom.$row_setting.hide()
         },
         func: {
-
             // 加密
             btn_encode_click: () => {
                 if (!_this.func.checkKey()) {
@@ -54,7 +53,41 @@ new page_load("security-helper.js", _this = {
                 console.log("结果：" + encodedStr)
                 _this.dom.$textarea_results.val(encodedStr)
             },
+            // 解密
+            btn_decode_click: () => {
+                console.log("解密")
+                if (!_this.func.checkKey()) {
+                    toast("key&iv 无效，请设置密钥", "danger")
+                    return false;
+                }
+                let str = _this.dom.$input_value.val();
+                if (!_this.func.checkValue(str)) {
+                    toast("请输入需要解密的内容", "danger")
+                    return false;
+                }
+                let decodedStr = _this.data.djTriDes.decode(str, _this.data.key, _this.data.iv)
+                console.log("结果：" + decodedStr)
+                _this.dom.$textarea_results.val(decodedStr)
+            },
+            // 保存密钥
+            btn_save_key_click: () => {
+                // 保存数据
+                _this.data.key = _this.dom.$input_key.val();
+                _this.data.iv = _this.dom.$input_iv.val();
 
+                if (!_this.func.checkKey()) {
+                    toast("key&iv 无效，请设置密钥", "danger")
+                    return false;
+                }
+
+                // 隐藏设置
+                _this.dom.$row_setting.hide()
+
+                // 数据持久化
+                _this.data.utools_db.put("security-helper-key", _this.data.key)
+                _this.data.utools_db.put("security-helper-iv", _this.data.iv)
+
+            },
             // 检查密钥
             checkKey: () => {
                 console.log({
@@ -83,51 +116,21 @@ new page_load("security-helper.js", _this = {
         listener: () => {
             // 加密
             _this.dom.$btn_encode.click(
-                () => _this.func.btn_encode_click
+                _this.func.btn_encode_click
             )
             // 解密
-            _this.dom.$btn_decode.click(() => {
-                console.log("解密")
-                if (!_this.func.checkKey()) {
-                    toast("key&iv 无效，请设置密钥", "danger")
-                    return false;
-                }
-                let str = _this.dom.$input_value.val();
-                if (!_this.func.checkValue(str)) {
-                    toast("请输入需要解密的内容", "danger")
-                    return false;
-                }
-                let decodedStr = _this.data.djTriDes.decode(str, _this.data.key, _this.data.iv)
-                console.log("结果：" + decodedStr)
-                _this.dom.$textarea_results.val(decodedStr)
-            })
-
+            _this.dom.$btn_decode.click(
+                _this.func.btn_decode_click
+            )
             // 点击设置密钥按钮
             _this.dom.$btn_setting.click(() => {
                 // 显示设置
                 _this.dom.$row_setting.show()
             })
-
             // 保存 key iv
-            _this.dom.$btn_save_key.click(() => {
-                // 保存数据
-                _this.data.key = _this.dom.$input_key.val();
-                _this.data.iv = _this.dom.$input_iv.val();
-
-                if (!_this.func.checkKey()) {
-                    toast("key&iv 无效，请设置密钥", "danger")
-                    return false;
-                }
-
-                // 隐藏设置
-                _this.dom.$row_setting.hide()
-
-                // 数据持久化
-                _this.data.utools_db.put("security-helper-key", _this.data.key)
-                _this.data.utools_db.put("security-helper-iv", _this.data.iv)
-
-            })
-
+            _this.dom.$btn_save_key.click(
+                _this.func.btn_save_key_click
+            )
             _this.dom.$btn_save_cancel.click(() => {
                 // 隐藏设置
                 _this.dom.$row_setting.hide()
