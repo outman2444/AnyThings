@@ -40,6 +40,7 @@
                         path_main: "./page/main/main.html",
                     },
                     func: {
+                        // 检查是否登陆
                         check_login: () => {
                             // 获取 账户名密码
                             let username = _this.data.utools_db.get("username");
@@ -47,17 +48,28 @@
                             username = _this.data.string_util.defaultIfNull(username, "")
                             password = _this.data.string_util.defaultIfNull(password, "")
                             return _this.data.string_util.isNotBlank(username) && _this.data.string_util.isNotBlank(password);
+                        },
+                        // 显示页面
+                        show_page: ()=>{
+                            // 校验登录信息  没有则踢到登录页
+                            if (!_this.func.check_login()) {
+                                console.log("未登陆")
+                                _this.dom.$index_body.load(_this.data.path_login)
+                            } else {
+                                console.log("已登陆")
+                                _this.dom.$index_body.load(_this.data.path_main)
+                            }
                         }
                     },
                     on_ready: () => {
-                        // 校验登录信息  没有则踢到登录页
-                        if (!_this.func.check_login()) {
-                            console.log("未登陆")
-                            _this.dom.$index_body.load(_this.data.path_login)
-                        } else {
-                            console.log("已登陆")
-                            _this.dom.$index_body.load(_this.data.path_main)
-                        }
+                        // 显示页面
+                       _this.func.show_page();
+
+                        // 注册插件显示时逻辑
+                        utools.onPluginEnter(({code, type, payload}) => {
+                            console.log('用户进入插件', code, type, payload)
+                            _this.func.show_page();
+                        })
                     },
                     listener: () => {
                     }
